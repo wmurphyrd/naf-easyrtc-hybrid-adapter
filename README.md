@@ -1,4 +1,4 @@
-# NAF EasyRTC Hyrbid Adapter
+# NAF EasyRTC Hybrid Adapter
 
 An adapter for networked-aframe that provides WebRTC voice chat in A-Frame,
 but does not utilize DataChannels,
