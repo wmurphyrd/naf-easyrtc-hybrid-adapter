@@ -1,0 +1,38 @@
+{
+  "name": "naf-easyrtc-hybrid-adapter",
+  "version": "0.0.1",
+  "description": "Audio-enabled WebRTC adapter for networked-aframe without the DataChannels feature requirement",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma",
+    "dev": "watchify server/main.js -o server/static/build.js",
+    "server": "node server/easyrtc-server.js",
+    "start": "concurrently \"npm run dev\" \"npm run server\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/wmurphyrd/naf-easyrtc-hybrid-adapter"
+  },
+  "keywords": [
+    "A-Frame",
+    "networked-aframe",
+    "WebRTC",
+    "EasyRTC",
+    "Edge",
+    "Safari",
+    "Exokit"
+  ],
+  "author": "William Murphy",
+  "license": "MIT",
+  "peerDependencies": {
+    "aframe": "^0.8.2",
+    "networked-aframe": "^0.6.1"
+  },
+  "devDependencies": {
+    "aframe": "^0.8.2",
+    "concurrently": "^4.0.1",
+    "networked-aframe": "^0.6.1",
+    "standard": "^12.0.1",
+    "watchify": "^3.11.0"
+  }
+}
