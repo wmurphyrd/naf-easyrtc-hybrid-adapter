@@ -20,7 +20,8 @@
     "EasyRTC",
     "Edge",
     "Safari",
-    "Exokit"
+    "Exokit",
+    "audio"
   ],
   "author": "William Murphy",
   "license": "MIT",
@@ -31,8 +32,14 @@
   "devDependencies": {
     "aframe": "^0.8.2",
     "concurrently": "^4.0.1",
+    "easyrtc": "github:priologic/easyrtc#00c4cdfba1ea0554ba58b81c6f9e381172ef960a",
+    "express": "^4.16.3",
+    "http": "^0.0.0",
     "networked-aframe": "^0.6.1",
+    "serve-static": "^1.13.2",
+    "socket.io": "^2.1.1",
     "standard": "^12.0.1",
-    "watchify": "^3.11.0"
+    "watchify": "^3.11.0",
+    "webrtc-adapter": "^6.4.0"
   }
 }

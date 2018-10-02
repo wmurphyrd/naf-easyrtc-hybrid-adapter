@@ -1,10 +1,5 @@
-/* global NAF */
-const NoOpAdapter = require('networked-aframe/src/adapters/NoOpAdapter')
-
-class EasyRtcHyrbidAdapter extends NoOpAdapter {
+class EasyRtcHyrbidAdapter {
   constructor (easyrtc) {
-    super()
-
     this.easyrtc = easyrtc || window.easyrtc
     this.app = 'default'
     this.room = 'default'
@@ -128,11 +123,11 @@ class EasyRtcHyrbidAdapter extends NoOpAdapter {
       clientId,
       function (caller, media) {
         if (media === 'datachannel') {
-          NAF.log.write('Successfully started datachannel to ', caller)
+          window.NAF.log.write('Successfully started datachannel to ', caller)
         }
       },
       function (errorCode, errorText) {
-        NAF.log.error(errorCode, errorText)
+        window.NAF.log.error(errorCode, errorText)
       },
       function (wasAccepted) {
         // console.log("was accepted=" + wasAccepted);
@@ -167,21 +162,21 @@ class EasyRtcHyrbidAdapter extends NoOpAdapter {
     var status = this.easyrtc.getConnectStatus(clientId)
 
     if (status === this.easyrtc.IS_CONNECTED) {
-      return NAF.adapters.IS_CONNECTED
+      return window.NAF.adapters.IS_CONNECTED
     } else if (status === this.easyrtc.NOT_CONNECTED) {
-      return NAF.adapters.NOT_CONNECTED
+      return window.NAF.adapters.NOT_CONNECTED
     } else {
-      return NAF.adapters.CONNECTING
+      return window.NAF.adapters.CONNECTING
     }
   }
 
   getMediaStream (clientId) {
     var that = this
     if (this.audioStreams[clientId]) {
-      NAF.log.write('Already had audio for ' + clientId)
+      window.NAF.log.write('Already had audio for ' + clientId)
       return Promise.resolve(this.audioStreams[clientId])
     } else {
-      NAF.log.write('Waiting on audio for ' + clientId)
+      window.NAF.log.write('Waiting on audio for ' + clientId)
       return new Promise(function (resolve) {
         that.pendingAudioRequest[clientId] = resolve
       })
@@ -199,7 +194,7 @@ class EasyRtcHyrbidAdapter extends NoOpAdapter {
   _storeAudioStream (easyrtcid, stream) {
     this.audioStreams[easyrtcid] = stream
     if (this.pendingAudioRequest[easyrtcid]) {
-      NAF.log.write('got pending audio for ' + easyrtcid)
+      window.NAF.log.write('got pending audio for ' + easyrtcid)
       this.pendingAudioRequest[easyrtcid](stream)
       delete this.pendingAudioRequest[easyrtcid](stream)
     }
@@ -219,13 +214,13 @@ class EasyRtcHyrbidAdapter extends NoOpAdapter {
         that.easyrtc.connect(that.app, connectSuccess, connectFailure)
       },
       function (errorCode, errmesg) {
-        NAF.log.error(errorCode, errmesg)
+        window.NAF.log.error(errorCode, errmesg)
       }
     )
   }
 
   _getRoomJoinTime (clientId) {
-    var myRoomId = NAF.room
+    var myRoomId = window.NAF.room
     var joinTime = this.easyrtc.getRoomOccupantsAsMap(myRoomId)[clientId]
       .roomJoinTime
     return joinTime
